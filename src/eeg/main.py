@@ -1,6 +1,6 @@
 import pyxdf
 import matplotlib.pyplot as plt
-import numpy as np
+import numpy as np  # noqa: F401
 
 data, header = pyxdf.load_xdf("data/1min_3polar.xdf")
 

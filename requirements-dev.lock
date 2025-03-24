@@ -14,20 +14,35 @@ contourpy==1.2.1
     # via matplotlib
 cycler==0.12.1
     # via matplotlib
+et-xmlfile==2.0.0
+    # via openpyxl
 fonttools==4.53.1
     # via matplotlib
+joblib==1.4.2
+    # via scikit-learn
 kiwisolver==1.4.5
     # via matplotlib
 matplotlib==3.9.2
     # via eeg
 numpy==2.1.0
     # via contourpy
+    # via eeg
     # via matplotlib
+    # via pandas
+    # via pyedflib
     # via pyxdf
+    # via scikit-learn
+    # via scipy
+openpyxl==3.1.5
+    # via eeg
 packaging==24.1
     # via matplotlib
+pandas==2.2.3
+    # via eeg
 pillow==10.4.0
     # via matplotlib
+pyedflib==0.1.40
+    # via eeg
 pyparsing==3.1.4
     # via matplotlib
 pyqt6==6.7.1
@@ -38,7 +53,19 @@ pyqt6-sip==13.8.0
     # via pyqt6
 python-dateutil==2.9.0.post0
     # via matplotlib
+    # via pandas
+pytz==2025.1
+    # via pandas
 pyxdf==1.16.8
     # via eeg
+scikit-learn==1.6.1
+    # via eeg
+scipy==1.15.2
+    # via eeg
+    # via scikit-learn
 six==1.16.0
     # via python-dateutil
+threadpoolctl==3.6.0
+    # via scikit-learn
+tzdata==2025.2
+    # via pandas

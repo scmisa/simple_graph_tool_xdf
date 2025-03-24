@@ -69,11 +69,11 @@ else:
 # ----------------------------------------------------------------------
 # Step 7: Plot Data and Regression Line
 # ----------------------------------------------------------------------
-plt.scatter(X, Y, color="blue", label="Data Points")
-plt.plot(X, A * X + B, color="red", label=f"Fit: Y = {A:.2f}X + {B:.2f}")
+plt.scatter(X, Y, color="blue")
+plt.plot(X, A * X + B, color="red", label=f"Funkcja: Y = {A:.2f}X + {B:.2f}")
 plt.xlabel("X (D²)")
 plt.ylabel("Y (D·T²)")
-plt.title("Linear Regression for Gravity Calculation")
+plt.title("Regresja Liniowa")
 plt.legend()
 plt.grid(True)
 plt.show()

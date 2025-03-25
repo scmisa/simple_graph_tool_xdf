@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 # Load data from Excel
-data = pd.read_excel("data/Dane.xlsx")
+data = pd.read_excel("data/Pendulum.xlsx")
 
 # Extract D, t1, and t2 values from the Excel file
 D = np.array(data["D"])  # Distance (meters)

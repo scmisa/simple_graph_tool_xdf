@@ -1,6 +1,7 @@
-# eeg
+# Graph Plotter for Physics Pendulum exercis
 
-Simple tool to graph using matplotlib and pyxdf
+
+Simple tool to graph using matplotlib and numpy
 
 ## Dependencies
 

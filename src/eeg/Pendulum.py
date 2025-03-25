@@ -152,6 +152,25 @@ plt.scatter(
     X[:-1], Y[:-1], color="blue", label="Punkty uwzględnione w obliczeniach"
 )  # Included points
 plt.plot(X, A * X + B, color="red", label=f"Funkcja: Y = {A:.2f}X + {B:.2f}")
+
+# Add results as text on the plot
+results_text = (
+    f"A: {A:.4f} ± {u_A:.4f} s²/m\n"
+    f"B: {B:.4f} ± {u_B:.4f} m·s²\n"
+    f"Przyśpieszenie ziemskie (g): {g:.4f} ± {u_g:.4f} m/s²\n"
+    f"Moment Bezwładności: {moment_of_inertia:.4f} ± {u_moment_of_inertia:.4f} kg·m²"
+)
+
+plt.text(
+    0.05,
+    0.95,
+    results_text,
+    transform=plt.gca().transAxes,
+    fontsize=10,
+    verticalalignment="top",
+    bbox=dict(boxstyle="round", facecolor="white", alpha=0.8),
+)
+
 plt.title("Zależność X od Y")
 plt.xlabel("X (m²)")
 plt.ylabel("Y (m·s²)")

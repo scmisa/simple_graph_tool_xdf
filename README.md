@@ -75,7 +75,6 @@ A simple tool to analyze and graph data from pendulum experiments using `matplot
 Slope (A): 3.1046 ± 0.1059 s²/m Intercept (B): 0.3433 ± 0.0073 m·s² Gravity (g): 12.7161 ± 1.3466 m/s² Moment of Inertia: 0.0866 ± 0.0035 kg·m²
 ```
 
-
 ### Graph
 
 - The graph will display the data points, regression line, and the results in a text box.

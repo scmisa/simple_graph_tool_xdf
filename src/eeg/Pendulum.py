@@ -51,7 +51,7 @@ u_B = std_error * np.sqrt(np.sum(X**2) / (n * denominator))
 if A > 0:
     g = (4 * np.pi**2) / A
     # Uncertainty in g via error propagation: u_g = (4π²/A²) * u_A
-    u_g = (4 * np.pi**2 / A**2) * u_A
+    u_g = (4 * np.pi**2 / A) * u_A
 else:
     raise ValueError("Negative slope (A). Check data or model assumptions.")
 
@@ -63,11 +63,11 @@ print(f"Intercept (B): {B:.4f} ± {u_B:.4f}")
 print(f"Gravity (g): {g:.4f} ± {u_g:.4f} m/s²")
 
 # Plotting
-plt.scatter(X, Y, color="blue", label="Data Points")
-plt.plot(X, A * X + B, color="red", label=f"Fit: Y = {A:.2f}X + {B:.2f}")
+plt.scatter(X, Y, color="blue")
+plt.plot(X, A * X + B, color="red", label=f"Funkcja: Y = {A:.2f}X + {B:.2f}")
 plt.xlabel("X (D²)")
 plt.ylabel("Y (D·T²)")
-plt.title("Linear Regression with Uncertainties")
+plt.title("Regresja Liniowa Najmniejszych Kwadratów")
 plt.legend()
 plt.grid(True)
 plt.show()

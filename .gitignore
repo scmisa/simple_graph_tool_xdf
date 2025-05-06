@@ -8,3 +8,17 @@ wheels/
 
 # venv
 .venv
+
+# LaTeX generated files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.fdb_latexmk
+*.synctex
+*.run.xml

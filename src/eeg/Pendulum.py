@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import tkinter as tk
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 
 # Load data from Excel
 data = pd.read_excel("data/Pendulum.xlsx")
@@ -10,9 +13,9 @@ D = np.array(data["D"])  # Distance (meters)
 t1 = np.array(data["t-1"])  # Time 1 (seconds) - 20 oscillations
 t2 = np.array(data["t-2"])  # Time 2 (seconds) - 20 oscillations
 
-D_calc = D[:-1]  # Skip the first two rows
-t1_calc = t1[:-1]
-t2_calc = t2[:-1]
+D_calc = D[:-3]  # Skip the first two rows
+t1_calc = t1[:-3]
+t2_calc = t2[:-3]
 
 # Calculate T as instructed: T = (t1 + t2) / 40
 # T - period of one oscillation
@@ -144,12 +147,57 @@ print(
     f"Moment of Inertia: {moment_of_inertia:.4f} ± {u_moment_of_inertia:.4f}" + "kg·m²"
 )
 
+# Function to create a separate window with LaTeX-rendered equations
+def show_latex_window():
+    # Create a new Tkinter window
+    latex_window = tk.Tk()
+    latex_window.title("Calculations and Equations in LaTeX")
+
+    # Create a Matplotlib figure
+    fig = Figure(figsize=(6, 6), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.axis("off")  # Turn off axes
+
+    # Add LaTeX-rendered equations and calculations
+    latex_text = (
+        r"$A = \frac{\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\sum (X_i - \bar{X})^2}$" + "\n"
+        r"$B = \bar{Y} - A \cdot \bar{X}$" + "\n"
+        r"$g = \frac{4\pi^2}{A}$" + "\n"
+        r"$I = M \cdot \frac{B}{A}$" + "\n\n"
+        r"$A = " + f"{A:.2f} \pm {u_A:.2f} \, \mathrm{{s^2/m}}$" + "\n"
+        r"$B = " + f"{B:.2f} \pm {u_B:.2f} \, \mathrm{{m \cdot s^2}}$" + "\n"
+        r"$g = " + f"{g:.2f} \pm {u_g:.2f} \, \mathrm{{m/s^2}}$" + "\n"
+        r"$I = " + f"{moment_of_inertia:.2f} \pm {u_moment_of_inertia:.2f} \, \mathrm{{kg \cdot m^2}}$"
+    )
+    ax.text(
+        0.5,
+        0.5,
+        latex_text,
+        fontsize=12,
+        ha="center",
+        va="center",
+        transform=ax.transAxes,
+        bbox=dict(boxstyle="round", facecolor="white", alpha=0.8),
+    )
+
+    # Embed the Matplotlib figure in the Tkinter window
+    canvas = FigureCanvasTkAgg(fig, master=latex_window)
+    canvas_widget = canvas.get_tk_widget()
+    canvas_widget.pack(fill=tk.BOTH, expand=True)
+
+    # Run the Tkinter event loop
+    latex_window.mainloop()
+
+
+# Call the function to show the LaTeX window
+show_latex_window()
+
 # Plotting with all data points
 plt.scatter(
-    X[-1:], Y[-1:], color="orange", label="Punkt wykluczony z obliczeń"
+    X[-3:], Y[-3:], color="orange", label="Punkt wykluczony z obliczeń"
 )  # Excluded points
 plt.scatter(
-    X[:-1], Y[:-1], color="blue", label="Punkty uwzględnione w obliczeniach"
+    X[:-3], Y[:-3], color="blue", label="Punkty uwzględnione w obliczeniach"
 )  # Included points
 plt.plot(X, A * X + B, color="red", label=f"Funkcja: Y = {A:.2f}X + {B:.2f}")
 
@@ -161,15 +209,15 @@ results_text = (
     f"Moment Bezwładności: {moment_of_inertia:.4f} ± {u_moment_of_inertia:.4f} kg·m²"
 )
 
-plt.text(
-    0.05,
-    0.95,
-    results_text,
-    transform=plt.gca().transAxes,
-    fontsize=10,
-    verticalalignment="top",
-    bbox=dict(boxstyle="round", facecolor="white", alpha=0.8),
-)
+# plt.text(
+#     0.05,
+#     0.95,
+#     results_text,
+#     transform=plt.gca().transAxes,
+#     fontsize=10,
+#     verticalalignment="top",
+#     bbox=dict(boxstyle="round", facecolor="white", alpha=0.8),
+# )
 
 plt.title("Zależność X od Y")
 plt.xlabel("X (m²)")
@@ -177,7 +225,6 @@ plt.ylabel("Y (m·s²)")
 plt.legend()
 plt.grid(True)
 plt.show()
-
 
 # TODO:
 # - Jednostki dla X i Y, A i B

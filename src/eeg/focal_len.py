@@ -1,82 +1,90 @@
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 import numpy as np
-from scipy.optimize import curve_fit
 
-# Wczytaj dane z Excela
-data1 = pd.read_excel("data/focal-length.xlsx", sheet_name="pomn")
-data2 = pd.read_excel("data/focal-length.xlsx", sheet_name="pow")
+# Wczytaj dane
+data_pomn = pd.read_excel("data/focal-length.xlsx", sheet_name="pomn")  # obraz pomniejszony
+data_pow = pd.read_excel("data/focal-length.xlsx", sheet_name="pow")   # obraz powiększony
 
-measurment_err = 0.1  # cm
+def przygotuj_dane(data):
+    if '~x' not in data.columns:
+        data['~x'] = data[['x1', 'x2', 'x3', 'x4', 'x5']].mean(axis=1)
+    return data
 
-# Oblicz średnie wartości x z pięciu pomiarów
-x_pomn = np.mean([data1[f"x{i}"] for i in range(1, 6)], axis=0)
-x_pow = np.mean([data2[f"x{i}"] for i in range(1, 6)], axis=0)
+def rysuj_wykres(data, tytul, kolor_punktu, kolor_promieni):
+    data = przygotuj_dane(data)
 
-y_pomn = data1["y"]
-y_pow = data2["y"]
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-# Oblicz ogniskowe f dla każdego pomiaru: 1/f = 1/x + 1/y
-f_pomn = 1 / (1 / x_pomn + 1 / y_pomn)
-f_pow = 1 / (1 / x_pow + 1 / y_pow)
+    # Store all points to find intersections between actual light rays
+    wszystkie_promienie = []
 
-# Średnie ogniskowe
-avg_f_pomn = np.mean(f_pomn)
-avg_f_pow = np.mean(f_pow)
-f_avg = np.mean([avg_f_pomn, avg_f_pow])
-f_err = measurment_err / np.sqrt(len(f_pomn) + len(f_pow))
+    for i, row in data.iterrows():
+        x = row['~x']
+        y = row['y']
 
-print(f"Średnia ogniskowa: {f_avg:.2f} cm ± {f_err:.2f} cm")
+        # Przedmiot (x, 0), obraz (0, y) - główny promień
+        ax.plot([x, 0], [0, y], linestyle='-', color=kolor_promieni, alpha=0.6)
+        wszystkie_promienie.append(((x, 0), (0, y)))
 
-# --- GRAFICZNE WYZNACZENIE OGNISKOWEJ ---
+        # Punkty
+        ax.errorbar(x, 0, xerr=0.2, fmt='o', color=kolor_punktu, label='Przedmiot' if i == 0 else "")
+        ax.errorbar(0, y, yerr=0.2, fmt='o', color='black', label='Obraz' if i == 0 else "")
 
+    # Znajdź przecięcia między wszystkimi parami promieni
+    punkty_przeciecia = []
+    for i in range(len(wszystkie_promienie)):
+        for j in range(i + 1, len(wszystkie_promienie)):
+            # Weź dwa różne promienie
+            (x1, y1), (x2, y2) = wszystkie_promienie[i]
+            (x3, y3), (x4, y4) = wszystkie_promienie[j]
+            
+            try:
+                a1 = (y2 - y1) / (x2 - x1)
+                b1 = y1 - a1 * x1
+                
+                a2 = (y4 - y3) / (x4 - x3)
+                b2 = y3 - a2 * x3
+                
+                # Oblicz punkt przecięcia
+                if abs(a1 - a2) > 1e-10:  # Jeśli linie nie są równoległe
+                    x_przec = (b2 - b1) / (a1 - a2)
+                    y_przec = a1 * x_przec + b1
+                    
+                    # Sprawdź czy punkt przecięcia leży na obu odcinkach
+                    if (min(x1, x2) <= x_przec <= max(x1, x2) and
+                        min(x3, x4) <= x_przec <= max(x3, x4)):
+                        punkty_przeciecia.append((x_przec, y_przec))
+            except:
+                continue
 
-# Dopasuj proste y = ax + b do obu zbiorów danych
-def lin(x, a, b):
-    return a * x + b
+    if punkty_przeciecia:
+        # Wybierz pierwszy punkt przecięcia
+        x_przec, y_przec = punkty_przeciecia[2]
+        
+        # Narysuj punkt przecięcia
+        ax.plot(x_przec, y_przec, 'r.', markersize=10)
+        
+        # Narysuj linię referencyjną do osi x
+        ax.plot([x_przec, x_przec], [y_przec, 0], '--', color='gray', alpha=0.8)
+        
+        # Zaznacz ogniskową
+        f_zmierzona = abs(x_przec)
+        ax.axvline(x=f_zmierzona, linestyle='--', color='red', alpha=0.7, 
+                  label=f'Ogniskowa f = {f_zmierzona:.1f} cm')
+        ax.axvline(x=-f_zmierzona, linestyle='--', color='red', alpha=0.7)
 
+    ax.axvline(x=0, color='blue', linewidth=2, label='Soczewka')
+    ax.axhline(y=0, color='black', linewidth=1)
 
-params_pomn, _ = curve_fit(lin, x_pomn, y_pomn)
-params_pow, _ = curve_fit(lin, x_pow, y_pow)
+    ax.set_title(tytul)
+    ax.set_xlabel("Położenie (x) [cm]")
+    ax.set_ylabel("Wysokość (y) [cm]")
+    ax.legend()
+    ax.grid(True)
+    plt.tight_layout()
+    plt.show()
 
-lin_pomn = lambda x: params_pomn[0] * x + params_pomn[1]
-lin_pow = lambda x: params_pow[0] * x + params_pow[1]
-
-# Oblicz punkt przecięcia prostych (x_fg, y_fg)
-A1, B1 = params_pomn
-A2, B2 = params_pow
-
-x_fg = (B2 - B1) / (A1 - A2)
-y_fg = lin_pomn(x_fg)
-fg = (x_fg + y_fg) / 2
-ufg = abs(x_fg - y_fg) / 2
-
-print(f"Graficznie wyznaczona ogniskowa: {fg:.2f} cm ± {ufg:.2f} cm")
-
-# WYKRES
-x_min = min(np.min(x_pomn), np.min(x_pow)) - 5
-x_max = max(np.max(x_pomn), np.max(x_pow)) + 5
-y_min = min(np.min(y_pomn), np.min(y_pow)) - 5
-y_max = max(np.max(y_pomn), np.max(y_pow)) + 5
-
-x_vals = np.linspace(x_min, x_max, 500)
-
-plt.figure(figsize=(8, 6))
-plt.scatter(x_pomn, y_pomn, color="blue", label="Obraz pomniejszony")
-plt.scatter(x_pow, y_pow, color="red", label="Obraz powiększony")
-plt.plot(x_vals, lin_pomn(x_vals), "b--")
-plt.plot(x_vals, lin_pow(x_vals), "r--")
-plt.scatter(
-    [x_fg], [y_fg], color="black", marker="x", s=100, label=f"$f_n$ = {fg:.2f} cm"
-)
-
-plt.xlabel("x [cm] (odległość przedmiotu)")
-plt.ylabel("y [cm] (odległość obrazu)")
-plt.title("Graficzne wyznaczanie ogniskowej")
-plt.grid(True)
-plt.legend()
-plt.xlim(x_min, x_max)
-plt.ylim(y_min, y_max)
-plt.gca().set_aspect("equal", adjustable="box")
-plt.tight_layout()
-plt.show()
+# Wykresy
+rysuj_wykres(data_pow, "Obraz powiększony – skupianie promieni z błędem", "red", "orange")
+rysuj_wykres(data_pomn, "Obraz pomniejszony – skupianie promieni z błędem", "blue", "green")

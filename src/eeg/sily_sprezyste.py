@@ -50,42 +50,41 @@ def Smallest_square(x, y):
     return a, b, std_dev, r, r_squared
 
 def plt_spring_A(data):
-    L_0 = data["L_0"].iloc[0]  # początkowa długość sprężyny [mm]
+    L_0 = data["L_0"].iloc[0] / 1000  # początkowa długość sprężyny [mm] -> [m]
     M = data["M"]  # masa obciążenia [g]
     M = M / 1000  # przelicz na kg
-    L = data["L"]  # długość sprężyny [mm]
+    L = data["L"]  # długość sprężyny [m]
     g = 9.81  # przyspieszenie ziemskie [m/s^2]
     
     # Wykonaj regresję: M vs L
     a, b, std_dev, r, r_squared = Smallest_square(M, L)
-      # Oblicz stałą sprężyny k
+    
+    # Oblicz stałą sprężyny k
     # Z prawa Hooke'a: F = k * (L - L_0), oraz F = M * g
     # Więc: M * g = k * (L - L_0)
     # Przekształcając: L = (g/k) * M + L_0
     # Stąd: a = g/k, więc k = g/a
-    k = g / a  # stała sprężyny [N/m] (ponieważ a jest w mm/kg, potrzebna konwersja)
-    k_correct = k / 1000  # przelicz na właściwe jednostki [N/m]
-    
+    k = g / a  # stała sprężyny [N/m] (a jest w m/kg, więc k jest już w N/m)    
     # Upewnij się, że wartości są skalarne
     if hasattr(a, 'iloc'):
         a = a.iloc[0] if len(a) > 0 else float(a)
-    if hasattr(k_correct, 'iloc'):
-        k_correct = k_correct.iloc[0] if len(k_correct) > 0 else float(k_correct)
+    if hasattr(k, 'iloc'):
+        k = k.iloc[0] if len(k) > 0 else float(k)
     if hasattr(std_dev, 'iloc'):
         std_dev = std_dev.iloc[0] if len(std_dev) > 0 else float(std_dev)
     
-    print(f"Nachylenie a (mm/kg): {a:.4f}")
-    print(f"Stała sprężyny k: {k_correct:.4f} N/m")
+    print(f"Nachylenie a (m/kg): {a:.4f}")
+    print(f"Stała sprężyny k: {k:.4f} N/m")
     
     # Oblicz niepewność stałej sprężyny
-    u_k = (k_correct * std_dev) / a  # niepewność stałej sprężyny [N/m]
+    u_k = (k * std_dev) / a  # niepewność stałej sprężyny [N/m]
     print(f"Niepewność stałej sprężyny u(k): {u_k:.4f} N/m")
 
     # Sprawdź czy L_0 odpowiada przecięciu z osią Y
     if abs(L_0 - b) <= 3 * std_dev:
-        print(f"L_0 = {L_0:.4f} mm odpowiada przecięciu y b = {b:.4f} ± {3 * std_dev:.4f} mm")
+        print(f"L_0 = {L_0:.4f} m odpowiada przecięciu y b = {b:.4f} ± {3 * std_dev:.4f} m")
     else:
-        print(f"L_0 = {L_0:.4f} mm nie odpowiada przecięciu y b = {b:.4f} mm")
+        print(f"L_0 = {L_0:.4f} m nie odpowiada przecięciu y b = {b:.4f} m")
     
     # Narysuj punkty pomiarowe i prostą regresji
     plt.figure(figsize=(10, 6))
@@ -93,7 +92,7 @@ def plt_spring_A(data):
     plt.plot(M, a * M + b, color='red', label='Prosta regresji')
     plt.title('Długość sprężyny w funkcji masy (Metoda A)')
     plt.xlabel('Masa (kg)')
-    plt.ylabel('Długość sprężyny (mm)')
+    plt.ylabel('Długość sprężyny (m)')
     plt.grid()
     plt.legend()
     plt.show()

@@ -1,0 +1,105 @@
+% filepath: c:\Users\kuba-\Desktop\simple_graph_tool_xdf\src\eeg\reportPendulum.tex
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc} % Use T1 font encoding
+\usepackage[utf8]{inputenc} % Ensure UTF-8 encoding
+\usepackage[polish]{babel} % Enable Polish language support
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{siunitx}
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0pt}{*0.5}{*0.5} % Adjusts spacing before and after subsections
+\usepackage{caption}
+\usepackage{lmodern}
+\usepackage{placeins} % For FloatBarrier
+\usepackage{hyperref} % For hyperlinks in the document
+
+\title{Sprawozdanie z Laboratorium Fizyki: Wahadło fizyczne}
+\date{}
+
+\begin{document}
+
+% --------------------------- STRONA TYTUŁOWA --------------------------
+\begin{titlepage}
+    \centering
+    \Large
+    \textbf{DYDAKTYCZNE LABORATORIUM FIZYKI} \\
+    \vspace{0.2cm}
+    \textbf{UNIWERSYTET RADOMSKI}\\
+    im. Kazimierza Pułaskiego w Radomiu \\
+    
+    \vspace{1.5cm}
+    \begin{flushleft}
+        \textbf{Wydział:} {WTEiI} \\
+        \textbf{Kierunek:} Informatyka \\
+        \textbf{Rok Akademicki:} 2024/2025 \\
+        \textbf{Semestr:} II \\
+        \textbf{Grupa:} 3 \\
+        \textbf{Zespół:} 2 \\
+        \textbf{Data:} 11.03.2025 \\
+        \textbf{Prowadzący ćwiczenie:} dr B. Winiarska \\
+    \end{flushleft}
+    
+    \vspace{1cm}
+    \begin{flushleft}
+        \textbf{Nr ćwiczenia:} 2 \\
+        \textbf{Temat ćwiczenia:} \\
+        \textbf{Siły Sprężyste (Współczynik Sprężystości)} \\
+    \end{flushleft}
+    
+    \vspace{1cm}
+    \begin{flushleft}
+        \textbf{Wykonujący ćwiczenie:}
+        \begin{itemize}
+            \item Jakub Oleszczuk
+            \item Mikołaj Majewski
+            \item Mateusz Ofiara
+        \end{itemize}
+    \end{flushleft}
+
+    \vfill
+    \begin{flushleft}
+        \textbf{Oceny:} \\
+        1.\hspace{2cm}2.\hspace{2cm}3.
+    \end{flushleft}
+\end{titlepage}
+
+% --------------------------- TREŚĆ SPRAWOZDANIA --------------------------
+\section*{Wstęp}
+
+\section*{Wyniki pomiarów}
+
+\begin{itemize}
+    \item Masa: \( m = 0.783 \, \text{kg} \)
+    \item Długość pręta: \( l = 0.9 \, \text{m} \pm -0.1 \, \text{m} \)
+    \item Środek ciężkości: \( s = 0.45 \, \text{m} \pm -0.1 \, \text{m} \)
+    \item Wychylenie: \( \alpha = 15^\circ \pm 1^\circ \)
+\end{itemize}
+
+Tabela pomiarów Metodą B:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    L.p. & d [m] & t1 [s] & t2 [s] & T [s] & X [m²] & Y [m$\cdot$s$^{-2}$] \\
+    \hline
+    1 & 0{,}35 & 28{,}91 & 28{,}90 & 1{,}45 & 0{,}010 & 0{,}21 \\
+    2 & 0{,}32 & 28{,}58 & 29{,}11 & 1{,}44 & 0{,}017 & 0{,}27 \\
+    3 & 0{,}29 & 28{,}79 & 28{,}80 & 1{,}44 & 0{,}026 & 0{,}33 \\
+    4 & 0{,}26 & 29{,}21 & 28{,}93 & 1{,}45 & 0{,}036 & 0{,}40 \\
+    5 & 0{,}23 & 29{,}26 & 29{,}39 & 1{,}47 & 0{,}048 & 0{,}47 \\
+    6 & 0{,}20 & 30{,}71 & 30{,}44 & 1{,}53 & 0{,}063 & 0{,}58 \\
+    7 & 0{,}17 & 31{,}24 & 31{,}47 & 1{,}57 & 0{,}078 & 0{,}69 \\
+    8 & 0{,}14 & 34{,}24 & 34{,}04 & 1{,}71 & 0{,}096 & 0{,}90 \\
+    9 & 0{,}11 & 38{,}17 & 38{,}19 & 1{,}91 & 0{,}116 & 1{,}24 \\
+    10 & 0{,}08 & 48{,}26 & 48{,}38 & 2{,}42 & 0{,}137 & 2{,}16 \\
+    \hline
+    \end{tabular}
+    \end{center}
+    
+\section*{Wykres}
+\section*{Obliczenia}
+\section*{Wnioski}
+\end{document}

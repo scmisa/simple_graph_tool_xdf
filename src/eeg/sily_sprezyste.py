@@ -5,8 +5,8 @@ import numpy as np
 
 def load_spring_data():
     """Załaduj dane pomiarowe z pliku Excel."""
-    dataA = pd.read_excel("data/Sily_sprezyste.xlsx", sheet_name="MetodaA")
-    dataB = pd.read_excel("data/Sily_sprezyste.xlsx", sheet_name="MetodaB")
+    dataA = pd.read_excel("data/sily_sprezyste.xlsx", sheet_name="MetodaA")
+    dataB = pd.read_excel("data/sily_sprezyste.xlsx", sheet_name="MetodaB")
     return dataA, dataB
 
 

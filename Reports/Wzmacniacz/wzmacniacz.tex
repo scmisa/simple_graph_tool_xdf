@@ -195,14 +195,60 @@ a także analiza wpływu kondensatora i rezystora na charakterystykę wzmacniacz
 %Jest jeden tylko wykres
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{wzmacniacz.png}
+    \includegraphics[width=1\textwidth]{wzmacniaczImpr.png}
     \caption{Wykres zależności wzmocnienia od częstotliwości}
     \label{fig:wzmacniacz}
 \end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\textwidth]{wykresy osobno.png}
+    \label{fig:wzmacniacz2}
+\end{figure}
+
 \section*{Analiza wyników}
-Wyniki pomiarów obejmowały wyznaczenie wzmocnienia napięciowego $K$ w funkcji częstotliwości (lg$(f)$) dla różnych konfiguracji wzmacniacza. 
-Analizowano wpływ obecności kondensatora $C_E$ oraz rezystora $R_0$ na wartość wzmocnienia $K$. 
-Wyniki przedstawione w tabelach i na wykresie pozwalają porównać charakterystyki wzmocnienia w zależności od konfiguracji układu.
+% ANALIZA CHARAKTERYSTYK WZMACNIACZA
+% ============================================================
+
+% bez CE bez R0:
+% ----------------------------------------
+% Maksymalne wzmocnienie: 3.680 (11.3 dB)
+% Minimalne wzmocnienie: 0.080 (-21.9 dB)
+% Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+% Pasmo przenoszenia (-3dB): 2990.0 Hz
+% Dolna częstotliwość graniczna: 10.0 Hz
+% Górna częstotliwość graniczna: 3000.0 Hz
+
+% bez CE z R0:
+% ----------------------------------------
+% Maksymalne wzmocnienie: 1.808 (5.1 dB)
+% Minimalne wzmocnienie: 0.016 (-35.9 dB)
+% Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+% Pasmo przenoszenia (-3dB): 3990.0 Hz
+% Dolna częstotliwość graniczna: 10.0 Hz
+% Górna częstotliwość graniczna: 4000.0 Hz
+
+% z CE z R0:
+% ----------------------------------------
+% Maksymalne wzmocnienie: 7.120 (17.0 dB)
+% Minimalne wzmocnienie: 0.008 (-41.9 dB)
+% Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+% Pasmo przenoszenia (-3dB): 1990.0 Hz
+% Dolna częstotliwość graniczna: 10.0 Hz
+% Górna częstotliwość graniczna: 2000.0 Hz
+
+% z CE bez R0:
+% ----------------------------------------
+% Maksymalne wzmocnienie: 14.080 (23.0 dB)
+% Minimalne wzmocnienie: 0.296 (-10.6 dB)
+% Częstotliwość przy max. wzmocnieniu: 1000.0 Hz
+% Pasmo przenoszenia (-3dB): 1900.0 Hz
+% Dolna częstotliwość graniczna: 100.0 Hz
+% Górna częstotliwość graniczna: 2000.0 Hz
+
+Wyniki pomiarów wykazały, że kondensator $C_E$ oraz rezystor $R_0$ mają istotny wpływ na charakterystykę wzmocnienia napięciowego wzmacniacza operacyjnego.
+W przypadku konfiguracji bez kondensatora $C_E$ i rezystora $R_0$, maksymalne wzmocnienie wynosiło 3.680, co odpowiada 11.3 dB, a pasmo przenoszenia wynosiło 2990 Hz. Wprowadzenie rezystora $R_0$ spowodowało zmniejszenie maksymalnego wzmocnienia do 1.808 (5.1 dB) oraz rozszerzenie pasma przenoszenia do 3990 Hz.
+W konfiguracji z kondensatorem $C_E$ i rezystorem $R_0$, maksymalne wzmocnienie wzrosło do 7.120 (17.0 dB), ale pasmo przenoszenia zmniejszyło się do 1990 Hz. Natomiast w przypadku konfiguracji z kondensatorem $C_E$ i bez rezystora $R_0$, maksymalne wzmocnienie osiągnęło wartość 14.080 (23.0 dB), a pasmo przenoszenia wyniosło 1900 Hz.
 
 \section*{Wnioski}
 Z przeprowadzonych badań wynika, że:

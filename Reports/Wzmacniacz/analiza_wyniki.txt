@@ -1,0 +1,39 @@
+ANALIZA CHARAKTERYSTYK WZMACNIACZA
+============================================================
+
+bez CE bez R0:
+----------------------------------------
+Maksymalne wzmocnienie: 3.680 (11.3 dB)
+Minimalne wzmocnienie: 0.080 (-21.9 dB)
+Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+Pasmo przenoszenia (-3dB): 2990.0 Hz
+Dolna częstotliwość graniczna: 10.0 Hz
+Górna częstotliwość graniczna: 3000.0 Hz
+
+bez CE z R0:
+----------------------------------------
+Maksymalne wzmocnienie: 1.808 (5.1 dB)
+Minimalne wzmocnienie: 0.016 (-35.9 dB)
+Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+Pasmo przenoszenia (-3dB): 3990.0 Hz
+Dolna częstotliwość graniczna: 10.0 Hz
+Górna częstotliwość graniczna: 4000.0 Hz
+
+z CE z R0:
+----------------------------------------
+Maksymalne wzmocnienie: 7.120 (17.0 dB)
+Minimalne wzmocnienie: 0.008 (-41.9 dB)
+Częstotliwość przy max. wzmocnieniu: 100.0 Hz
+Pasmo przenoszenia (-3dB): 1990.0 Hz
+Dolna częstotliwość graniczna: 10.0 Hz
+Górna częstotliwość graniczna: 2000.0 Hz
+
+z CE bez R0:
+----------------------------------------
+Maksymalne wzmocnienie: 14.080 (23.0 dB)
+Minimalne wzmocnienie: 0.296 (-10.6 dB)
+Częstotliwość przy max. wzmocnieniu: 1000.0 Hz
+Pasmo przenoszenia (-3dB): 1900.0 Hz
+Dolna częstotliwość graniczna: 100.0 Hz
+Górna częstotliwość graniczna: 2000.0 Hz
+

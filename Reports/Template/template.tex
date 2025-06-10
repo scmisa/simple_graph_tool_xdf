@@ -1,0 +1,87 @@
+\documentclass[10.5pt]{article}
+\usepackage[T1]{fontenc} % Use T1 font encoding
+\usepackage[utf8]{inputenc} % Ensure UTF-8 encoding
+\usepackage[polish]{babel} % Enable Polish language support
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{siunitx}
+\usepackage{titlesec}
+\titlespacing*{\subsection}{0pt}{*0.5}{*0.5} % Adjusts spacing before and after subsections
+\usepackage{caption}
+\usepackage{lmodern}
+\usepackage{placeins} % For FloatBarrier
+\usepackage{hyperref} % For hyperlinks in the document
+\usepackage{threeparttable} % For better table handling
+\usepackage{longtable} % For tables spanning multiple pages
+\usepackage{fancyhdr} % For headers and footers
+\usepackage{array} % For better table formatting
+\usepackage{xcolor} % For colors
+
+\title{Diody}
+\date{}
+
+\begin{document}
+
+% --------------------------- STRONA TYTUŁOWA --------------------------
+\thispagestyle{empty} % Remove page number from title page
+
+\begin{center}
+    % Logo uniwersytetu
+    \includegraphics[width=10cm,page=1, trim=40 0 0 0]{logaUR.pdf} \\
+    {\large\textbf{[Nazwa Laboratorium]}} \\
+\end{center}
+
+\vspace{0.5cm}
+
+% Main information box
+\begin{center}
+\fbox{\begin{minipage}{0.9\textwidth}
+\centering
+\vspace{0.5cm}
+{\Large\textbf{[Typ Ćwiczenia]}} \\
+\vspace{0.8cm}
+{\LARGE\textbf{[Temat Ćwiczenia]}} \\
+\vspace{0.5cm}
+\end{minipage}}
+\end{center}
+
+\vspace{1.5cm}
+
+% Information table
+\begin{center}
+\begin{tabular}{|>{\bfseries}p{4cm}|p{6cm}|}
+\hline
+Wydział: & [Wydział] \\
+\hline
+Kierunek: & [Kierunek] \\
+\hline
+Rok Akademicki: & [Rok Akademicki] \\
+\hline
+Semestr: & [Semestr] \\
+\hline
+Grupa: & [Grupa] \\
+\hline
+Zespół: & [Zespół] \\
+\hline
+Wykonujący: & [Wykonujący1] \\
+& [Wykonujący2] \\
+& [Wykonujący3] \\
+& [Wykonujący4] \\
+\hline
+Ocena: &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2cm}
+
+% --------------------------- TREŚĆ SPRAWOZDANIA --------------------------
+\subsection*{Cel ćwiczenia}
+\subsection*{Wprowadzenie teoretyczne}
+\subsection*{Wyniki pomiarów}
+\subsection*{Analiza Wyników}
+\subsection*{Podsumowanie}
+\end{document}

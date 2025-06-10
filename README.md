@@ -27,6 +27,27 @@ This repository includes tools for:
    - Process data for water and Wood's alloy temperature measurements.
    - Generate temperature vs. time plots with analysis.
 
+5. **Diode Analysis (Diody)**:
+   - Analyze diode characteristics and I-V curves.
+   - Calculate diode parameters and perform regression analysis.
+   - Generate characteristic plots for diode behavior analysis.
+
+6. **Signal Generator Analysis**:
+   - Analyze signal generator output characteristics.
+   - Process frequency response and amplitude measurements.
+   - Generate plots for signal analysis and characterization.
+
+7. **Amplifier Analysis (Wzmacniacz)**:
+   - Analyze amplifier gain and frequency response.
+   - Calculate amplification factors and bandwidth characteristics.
+   - Multiple analysis versions available (standard, clean, improved).
+   - Generate Bode plots and frequency response curves.
+
+8. **Thermal Resistance Analysis (TermOpor)**:
+   - Analyze thermal resistance and temperature coefficient measurements.
+   - Study temperature-dependent resistance characteristics.
+   - Process thermal response data and generate analysis plots.
+
 ---
 
 ## How to Use the Tools
@@ -58,6 +79,22 @@ This repository includes tools for:
     - Temperature measurements over time for various substances.
     - Data should include time and temperature columns for analysis.
 
+- For **Diode Analysis**:
+  - Ensure your data is stored in an Excel file with voltage and current measurements.
+  - Data should include columns for applied voltage and measured current for I-V characteristic analysis.
+
+- For **Signal Generator Analysis**:
+  - Ensure your data is stored in an Excel file (`Generator.xlsx`) with frequency and amplitude measurements.
+  - Data should include frequency response and signal characteristics for analysis.
+
+- For **Amplifier Analysis**:
+  - Ensure your data is stored in an Excel file (`Wzmacniacz.xlsx`) with gain and frequency measurements.
+  - Data should include input/output voltage measurements and frequency response data.
+
+- For **Thermal Resistance Analysis**:
+  - Ensure your data is stored in an Excel file (`TermOpor.xlsx`) with temperature and resistance measurements.
+  - Data should include temperature values and corresponding resistance measurements for analysis.
+
 ### 2. Install Dependencies
 
 The project requires the following Python libraries:
@@ -72,12 +109,12 @@ The project requires the following Python libraries:
 - `openpyxl`
 - `pyedflib`
 
-#### Using `rye` (Recommended)
+#### Using `uv` (Recommended)
 
-Install dependencies with [rye](https://rye.astral.sh/):
+Install dependencies with [uv](https://docs.astral.sh/uv/):
 
 ```bash
-rye sync
+uv sync
 ```
 
 #### Using `pip`
@@ -90,7 +127,7 @@ pip install pyxdf matplotlib pyqt6 numpy scipy pandas scikit-learn openpyxl pyed
 
 ### 3. Activate the Virtual Environment
 
-- If you are using `rye`, the virtual environment is automatically managed.
+- If you are using `uv`, the virtual environment is automatically managed.
 - Otherwise, activate the virtual environment manually:
   - **Linux/macOS**:
 
@@ -130,6 +167,36 @@ pip install pyxdf matplotlib pyqt6 numpy scipy pandas scikit-learn openpyxl pyed
   python src/eeg/termopara.py
   ```
 
+- For **Diode Analysis**:
+
+  ```bash
+  python src/eeg/diody.py
+  ```
+
+- For **Signal Generator Analysis**:
+
+  ```bash
+  python src/eeg/generator.py
+  ```
+
+- For **Amplifier Analysis**:
+
+  ```bash
+  python src/eeg/wzmacniacz.py
+  ```
+
+  Alternative versions:
+  ```bash
+  python src/eeg/wzmacniacz_clean.py
+  python src/eeg/wzmacniacz_improved.py
+  ```
+
+- For **Thermal Resistance Analysis**:
+
+  ```bash
+  python src/eeg/termopor.py
+  ```
+
 ### 5. View the Results
 
 - **Pendulum Experiments**:
@@ -153,6 +220,27 @@ pip install pyxdf matplotlib pyqt6 numpy scipy pandas scikit-learn openpyxl pyed
   - Processes temperature vs. time data for different materials.
   - Calculates cooling rates and temperature dependencies.
   - Generates temperature curves and analysis plots.
+
+- **Diode Analysis**:
+  - Analyzes I-V characteristics of diodes.
+  - Calculates diode parameters such as forward voltage and reverse saturation current.
+  - Generates characteristic curves and regression analysis plots.
+
+- **Signal Generator Analysis**:
+  - Processes frequency response and amplitude characteristics.
+  - Analyzes signal quality and distortion parameters.
+  - Generates frequency response plots and signal analysis graphs.
+
+- **Amplifier Analysis**:
+  - Calculates amplification gain and frequency response.
+  - Analyzes bandwidth and phase characteristics.
+  - Generates Bode plots and frequency response curves.
+  - Multiple analysis approaches available for different aspects of amplifier behavior.
+
+- **Thermal Resistance Analysis**:
+  - Analyzes temperature coefficient of resistance.
+  - Calculates thermal response characteristics.
+  - Generates temperature vs. resistance plots with regression analysis.
 
 ---
 
@@ -272,8 +360,17 @@ The project automatically generates LaTeX reports and plots for each experiment:
 
 ### Reports Directory Structure
 
-```
+```text
 Reports/
+├── Dioda/              # Diode analysis
+│   ├── dioda.pdf       # Compiled LaTeX report
+│   ├── dioda.tex       # LaTeX source
+│   ├── Figure_1.png    # I-V characteristic plot
+│   └── Figure_2.png    # Additional analysis plot
+├── Generator/          # Signal generator analysis
+│   ├── generator.pdf   # Compiled LaTeX report
+│   ├── generator.tex   # LaTeX source
+│   └── Generator.png   # Generator analysis plot
 ├── Ogniskowa/          # Focal length analysis
 │   ├── ogniskowa.pdf   # Compiled LaTeX report
 │   ├── ogniskowa.tex   # LaTeX source
@@ -288,11 +385,26 @@ Reports/
 │   ├── sily_sprezyste.tex  # LaTeX source
 │   ├── MetodaA.png         # Method A plot
 │   └── MetodaB.png         # Method B plot
-└── Termopara/          # Thermocouple analysis
-    ├── reportTermopara.pdf # Compiled report
-    ├── reportTermopara.tex # LaTeX source
-    ├── woda.png           # Water cooling plot
-    └── stopWooda.png      # Wood's alloy analysis plot
+├── Template/           # LaTeX template files
+│   ├── template.pdf    # Template document
+│   ├── template.tex    # LaTeX template source
+│   └── logaUR.pdf      # University logo
+├── Termopara/          # Thermocouple analysis
+│   ├── reportTermopara.pdf # Compiled report
+│   ├── reportTermopara.tex # LaTeX source
+│   ├── woda.png           # Water cooling plot
+│   └── stopWooda.png      # Wood's alloy analysis plot
+├── TermOpor/           # Thermal resistance analysis
+│   ├── termopor.pdf    # Compiled LaTeX report
+│   ├── termopor.tex    # LaTeX source
+│   └── termOpor.png    # Thermal resistance plot
+└── Wzmacniacz/         # Amplifier analysis
+    ├── wzmacniacz.pdf  # Compiled LaTeX report
+    ├── wzmacniacz.tex  # LaTeX source
+    ├── wzmacniacz.png  # Standard amplifier plot
+    ├── wzmacniaczImpr.png # Improved analysis plot
+    ├── wykresy osobno.png # Separate plots
+    └── analiza_wyniki.txt # Analysis results text file
 ```
 
 ### Data Files
@@ -302,6 +414,9 @@ All experimental data is stored in the `data/` directory:
 - `focal-length.xlsx` - Lens focal length measurements
 - `sily_sprezyste.xlsx` - Spring force analysis data (Methods A & B)
 - `Termopara.xlsx` - Thermocouple temperature measurements
+- `Generator.xlsx` - Signal generator analysis data
+- `Wzmacniacz.xlsx` - Amplifier analysis measurements
+- `TermOpor.xlsx` - Thermal resistance measurement data
 
 ---
 

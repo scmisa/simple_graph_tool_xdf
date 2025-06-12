@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # ?Dioda Germanowa w kierunku przewodzenia
 GP_I = np.array([10, 20, 50, 100, 200, 500, 1000, 5000])  # microampery
 GP_I = GP_I * 1e-6  # Convert to amperes
-GP_U = np.array([0.009, 0.016, 0.034, 0.052, 0.45, 0.113, 0.147, 0.238])  # Volts
+GP_U = np.array([0.009, 0.016, 0.034, 0.052, 0.075, 0.113, 0.147, 0.238])  # Volts
 
 # ?Dioda Germanowa w kierunku zaporowym
 GZ_U = np.array([5, 10, 15, 20, 30])  # Volts
@@ -20,7 +20,7 @@ KP_U = np.array([0.393, 0.416, 0.449, 0.478, 0.503, 0.546, 0.578, 0.653])  # Vol
 # ?Dioda Led w kierunku przewodzenia
 LED_I = np.array([10, 20, 50, 100, 200, 500, 1000, 5000])  # microampery
 LED_I = LED_I * 1e-6  # Convert to amperes
-LED_U = np.array([1.41, 1.447, 1.435, 1.581, 1.657, 1.608, 1.642, 1.793])  # Volts
+LED_U = np.array([1.41, 1.447, 1.435, 1.581, 1.557, 1.608, 1.642, 1.793])  # Volts
 
 # ?Dioda Zenera w kierunku przewodzenia
 ZZ_U = np.array([5.168, 5.535, 5.95, 6.21, 6.445, 6.61, 6.65, 6.68])  # Volts
